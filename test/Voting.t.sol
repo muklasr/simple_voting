@@ -112,10 +112,7 @@ contract VotingTest is Test {
     }
 
     /// @dev Helper function to add a candidate
-    function _addCandidate(
-        string memory candidateName,
-        bool expectEmit
-    ) internal {
+    function _addCandidate(string memory candidateName, bool expectEmit) internal {
         if (expectEmit) {
             _expectEmitCandidateAdded(candidateName);
         }
@@ -134,24 +131,20 @@ contract VotingTest is Test {
     }
 
     /// @dev Helper function to cast vote
-    function _vote(address voter, uint candidateId) internal {
+    function _vote(address voter, uint256 candidateId) internal {
         vm.prank(voter);
         voting.vote(candidateId);
     }
 
     /// @dev Helper function to assert candidate correctness
-    function _assertCandidate(
-        uint index,
-        string memory expectedName,
-        uint expectedVoteCount
-    ) internal view {
+    function _assertCandidate(uint256 index, string memory expectedName, uint256 expectedVoteCount) internal view {
         (string memory name, uint256 voteCount) = voting.candidates(index);
         assertEq(name, expectedName);
         assertEq(voteCount, expectedVoteCount);
     }
 
     /// @dev Returns the current number of candidates
-    function candidatesCount() internal view returns (uint) {
+    function candidatesCount() internal view returns (uint256) {
         return voting.candidatesCount();
     }
 
